@@ -24,14 +24,14 @@ span{
 }
 
 #bird {
-  width: 120px;
-  height: 100px;
+  width: 70px;
+  height: 50px;
   position: absolute;
   z-index: 1;
   top: 44%;
   left: 40%;
   background: url("assets/Bird.png") no-repeat center center;
-  background-size: cover;
+  background-size: contain;
 }
 
 #score {
@@ -62,15 +62,15 @@ span{
 
 .pipe {
 position: absolute;
-width: 60px;
-  background: url("assets/Pipe\ 1.jpg")
+width: 50px;
+  background-color: green;
 }
 
 .top-pipe {
 top: 0;
-border-bottom: 5px solid darkgreen;
+border-bottom: 10px solid darkgreen;
 }
 
 .bottom-pipe {
-border-top: 5px solid darkgreen
-}
+border-top: 10px solid darkgreen
+} 
