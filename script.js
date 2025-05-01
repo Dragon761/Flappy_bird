@@ -1,3 +1,4 @@
+let highScore = localStorage.getItem("flappyHighScore") || 0;
 let frame = 0;
 const frame_time = 150;
 
@@ -45,6 +46,11 @@ function startGame() {
   if (gameInterval !== null) return; // Prevent multiple intervals
 
   backgroundMusic.play();
+
+  start_btn.style.visibility = "hidden";
+
+  highScore = localStorage.getItem("flappyHighScore") || 0;
+  score_display.textContent = "Score: " + score + " | Best: " + highScore;
 
   gameInterval = setInterval(() => {
     applyGravitiy();
@@ -145,11 +151,14 @@ function setScore(newScore) {
     scoreSound.play();
   }
   score = newScore;
-  score_display.textContent = "Score" + score;
-  // " Best: " + highScore;
+  score_display.textContent = "Score: " + score;
+  " Best: " + highScore;
 }
 
 function endGame() {
+  if (Number(score) > Number(highScore)) {
+    localStorage.setItem("flappyHighScore", score);
+  }
   hitSound.play();
   clearInterval(gameInterval);
   gameInterval = null;
@@ -161,6 +170,8 @@ function endGame() {
 }
 
 function resetGame() {
+  start_btn.style.visibility = "visible";
+
   bird.style.top = "50%";
   bird_dy = 0;
   for (let pipe of pipes) {
@@ -179,7 +190,6 @@ let pipeSpeed = 3;
 
 function getDifficultySettings() {
   const selected = document.getElementById("difficulty-select").value;
-  console.log(selected);
   if (selected === "unskilled") {
     pipeSpeed = 5;
   } else if (selected === "mid") {
@@ -199,3 +209,18 @@ const backgroundMusic = new Audio("");
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
 backgroundMusic.play();
+
+const muteBtn = document.getElementById("mute-btn");
+
+let musicMuted = false;
+
+muteBtn.addEventListener("click", () => {
+  if (musicMuted) {
+    backgroundMusic.play();
+    muteBtn.textContent = "Mute Music";
+  } else {
+    backgroundMusic.pause();
+    muteBtn.textContent = "Play Music";
+  }
+  musicMuted = !musicMuted;
+});

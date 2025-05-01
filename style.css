@@ -28,7 +28,7 @@ span{
   height: 50px;
   position: absolute;
   z-index: 1;
-  top: 40%;
+  top: 480px;
   left: 40%;
   background: url("assets/Actually\ Perfect\ Mario.png") no-repeat center center;
   background-size: contain;
@@ -39,24 +39,25 @@ span{
 
 #score {
   position: absolute;
-  top: 20;
-  left:30px;
-  color: rgb(255, 255, 255);
+  top: 20px;
+  left: 20px;
+  color: rgb(0, 0, 0);
   font-size: 48;
   font-family: "Merriweather", serif;
 }
 
 #start-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 470px;
+  right: 900px;
   padding: 10px 20px;
   font-size: 32;
-  background-color: rgb(59, 146, 59);
-  color: white;
+  background-color: rgb(169, 255, 169);
+  color: rgb(0, 0, 0);
   border: none;
-  border-radius: 16;
+  border-radius: 160px;
   cursor: pointer;
+  margin: auto;
 }
 
 #start-btn:hover {
@@ -80,10 +81,17 @@ border-top: 10px solid darkgreen
 
 #difficulty-select {
 position: absolute;
-top: 100px;
-right: 20px;
+top: 530px;
+right: 893px;
 padding: 0px;
-font-size: 16px;
+font-size: 18px;
 border-radius: 5px;
+}
+
+#mute-btn {
+  position:absolute;
+  top: 530px;
+  left: 851px;
+  font-size: 16px;
 }
 
