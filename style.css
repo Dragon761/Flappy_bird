@@ -19,7 +19,7 @@ span{
   width: 100%;
   height: 100vh;
   margin: 0;
-  background: url(assets/Background\ 7.jpg);
+  background: url(assets/Interesting\ Background.png);
   background-size: cover;
 }
 
@@ -28,18 +28,21 @@ span{
   height: 50px;
   position: absolute;
   z-index: 1;
-  top: 44%;
+  top: 40%;
   left: 40%;
-  background: url("assets/Bird.png") no-repeat center center;
+  background: url("assets/Actually\ Perfect\ Mario.png") no-repeat center center;
   background-size: contain;
+
+  transform-origin: cover;
+  transition: transform 0.1 linear;
 }
 
 #score {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 20;
+  left:30px;
   color: rgb(255, 255, 255);
-  font-size: 24px;
+  font-size: 48;
   font-family: "Merriweather", serif;
 }
 
@@ -48,11 +51,11 @@ span{
   top: 20px;
   right: 20px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 32;
   background-color: rgb(59, 146, 59);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 16;
   cursor: pointer;
 }
 
@@ -62,7 +65,7 @@ span{
 
 .pipe {
 position: absolute;
-width: 50px;
+width: 100px;
   background-color: green;
 }
 
@@ -74,3 +77,13 @@ border-bottom: 10px solid darkgreen;
 .bottom-pipe {
 border-top: 10px solid darkgreen
 } 
+
+#difficulty-select {
+position: absolute;
+top: 100px;
+right: 20px;
+padding: 0px;
+font-size: 16px;
+border-radius: 5px;
+}
+
