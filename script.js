@@ -1,3 +1,4 @@
+let highScore = localStorage.getItem("flappyHighScore") || 0;
 let frame = 0;
 const frame_time = 150;
 
@@ -23,6 +24,9 @@ function applyGravitiy() {
   birdTop = Math.min(birdTop, game_container.offsetHeight - bird.offsetHeight);
 
   bird.style.top = birdTop + "px";
+
+  let angle = Math.min(Math.max(bird_dy * 2, -30), 90);
+  bird.style.transform = `rotate(${angle}deg)`;
 }
 
 document.addEventListener("keydown", (e) => {
@@ -32,6 +36,8 @@ document.addEventListener("keydown", (e) => {
       startGame();
     }
 
+    flapSound.play();
+
     bird_dy = -7;
   }
 });
@@ -39,11 +45,19 @@ document.addEventListener("keydown", (e) => {
 function startGame() {
   if (gameInterval !== null) return; // Prevent multiple intervals
 
+  backgroundMusic.play();
+
+  start_btn.style.visibility = "hidden";
+
+  highScore = localStorage.getItem("flappyHighScore") || 0;
+  score_display.textContent = "Score: " + score + " | Best: " + highScore;
+
   gameInterval = setInterval(() => {
     applyGravitiy();
     movePipes();
     checkCollision();
     frame++;
+    getDifficultySettings();
     if (frame % frame_time === 0) {
       createPipe();
     }
@@ -82,19 +96,8 @@ function createPipe() {
 
 function movePipes() {
   for (let pipe of pipes) {
-    pipe.style.left = pipe.offsetleft - 3 + "px";
-
-    if (pipe.offsetleft < -pipe.offsetWidth) {
-      pipe.remove();
-    }
-  }
-
-  pipes = pipes.filter((pipe) => pipe.offsetLeft + pipe.offsetWidth > 0);
-} // Remove old pipes from the array
-
-function movePipes() {
-  for (let pipe of pipes) {
-    pipe.style.left = pipe.offsetLeft - 3 + "px";
+    console.log(pipeSpeed);
+    pipe.style.left = pipe.offsetLeft - pipeSpeed + "px";
 
     // Remove pipes off screen
     if (pipe.offsetLeft < -pipe.offsetWidth) {
@@ -144,27 +147,80 @@ function checkCollision() {
 }
 
 function setScore(newScore) {
+  if (newScore > score) {
+    scoreSound.play();
+  }
   score = newScore;
-  score_display.textContent = "Score" + score;
+  score_display.textContent = "Score: " + score;
+  " Best: " + highScore;
 }
 
 function endGame() {
-clearInterval(gameInterval);
-gameInterval = null;
+  if (Number(score) > Number(highScore)) {
+    localStorage.setItem("flappyHighScore", score);
+  }
+  hitSound.play();
+  clearInterval(gameInterval);
+  gameInterval = null;
+  backgroundMusic.pause();
+  backgroundMusic.currentTime = 0;
 
-alert("You LOST! Your Score:" + score);
-resetGame();
+  alert("You LOST! Your Score:" + score);
+  resetGame();
 }
 
 function resetGame() {
-bird.style.top = "50%";
-bird_dy = 0;
-for (let pipe of pipes) {
-  pipe.remove();
+  start_btn.style.visibility = "visible";
+
+  bird.style.top = "50%";
+  bird_dy = 0;
+  for (let pipe of pipes) {
+    pipe.remove();
+  }
+  pipes = [];
+  setScore(0);
+  frame = 0;
+  game_state = "Start";
+  score_display.textContent = "";
+
+  bird.style.transform = `rotate(${0}deg)`;
 }
-pipes = [];
-setScore(0);
-frame = 0;
-game_state = "Start";
-score_display.textContent = "";
+
+let pipeSpeed = 3;
+
+function getDifficultySettings() {
+  const selected = document.getElementById("difficulty-select").value;
+  if (selected === "unskilled") {
+    pipeSpeed = 5;
+  } else if (selected === "mid") {
+    pipeSpeed = 7;
+  } else if (selected === "skilled") {
+    pipeSpeed = 15;
+  } else if (selected === "impossible") {
+    pipeSpeed = 1;
+  }
 }
+
+const flapSound = new Audio("");
+const scoreSound = new Audio("");
+const hitSound = new Audio("");
+
+const backgroundMusic = new Audio("");
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.5;
+backgroundMusic.play();
+
+const muteBtn = document.getElementById("mute-btn");
+
+let musicMuted = false;
+
+muteBtn.addEventListener("click", () => {
+  if (musicMuted) {
+    backgroundMusic.play();
+    muteBtn.textContent = "Mute Music";
+  } else {
+    backgroundMusic.pause();
+    muteBtn.textContent = "Play Music";
+  }
+  musicMuted = !musicMuted;
+});

@@ -19,7 +19,7 @@ span{
   width: 100%;
   height: 100vh;
   margin: 0;
-  background: url(assets/Background\ 7.jpg);
+  background: url(assets/Interesting\ Background.png);
   background-size: cover;
 }
 
@@ -28,32 +28,36 @@ span{
   height: 50px;
   position: absolute;
   z-index: 1;
-  top: 44%;
+  top: 480px;
   left: 40%;
-  background: url("assets/Bird.png") no-repeat center center;
+  background: url("assets/Actually\ Perfect\ Mario.png") no-repeat center center;
   background-size: contain;
+
+  transform-origin: cover;
+  transition: transform 0.1 linear;
 }
 
 #score {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  color: rgb(255, 255, 255);
-  font-size: 24px;
+  top: 20px;
+  left: 20px;
+  color: rgb(0, 0, 0);
+  font-size: 48;
   font-family: "Merriweather", serif;
 }
 
 #start-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 470px;
+  right: 900px;
   padding: 10px 20px;
-  font-size: 16px;
-  background-color: rgb(59, 146, 59);
-  color: white;
+  font-size: 32;
+  background-color: rgb(169, 255, 169);
+  color: rgb(0, 0, 0);
   border: none;
-  border-radius: 8px;
+  border-radius: 160px;
   cursor: pointer;
+  margin: auto;
 }
 
 #start-btn:hover {
@@ -62,7 +66,7 @@ span{
 
 .pipe {
 position: absolute;
-width: 50px;
+width: 100px;
   background-color: green;
 }
 
@@ -74,3 +78,20 @@ border-bottom: 10px solid darkgreen;
 .bottom-pipe {
 border-top: 10px solid darkgreen
 } 
+
+#difficulty-select {
+position: absolute;
+top: 530px;
+right: 893px;
+padding: 0px;
+font-size: 18px;
+border-radius: 5px;
+}
+
+#mute-btn {
+  position:absolute;
+  top: 530px;
+  left: 851px;
+  font-size: 16px;
+}
+
