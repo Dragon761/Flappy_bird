@@ -56,6 +56,7 @@ function startGame() {
     applyGravitiy();
     movePipes();
     checkCollision();
+    //updateBirdAvatar();
     frame++;
     getDifficultySettings();
     if (frame % frame_time === 0) {
@@ -224,3 +225,18 @@ muteBtn.addEventListener("click", () => {
   }
   musicMuted = !musicMuted;
 });
+
+//const birdImg = document.getElementById("bird");
+
+//function updateBirdAvatar(score) {
+//if (score >= 10 && score < 20) {
+ // bird.style.background = "url(/assest//assets/Bird\ 3.jpg) center center"
+//} else if (score >= 20) {
+//bird.style.background = "url(/assets/Bird\ 2.jpg) center center"
+
+//} else {
+//bird.style.background = "url(/assets/Bird.png) center center"
+
+
+//}
+//}

@@ -68,6 +68,7 @@ span{
 position: absolute;
 width: 100px;
   background-color: green;
+  background: url(assets/OIP.jpg)
 }
 
 .top-pipe {
