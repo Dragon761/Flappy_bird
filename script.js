@@ -163,6 +163,10 @@ function setScore(newScore) {
 }
 
 function endGame() {
+  score_display.style.top = "70%";
+  score_display.style.left= "40%";
+
+
   if (Number(score) > Number(highScore)) {
     localStorage.setItem("flappyHighScore", score);
   }
@@ -181,9 +185,7 @@ function resetGame() {
   muteBtn.style.visibility = "visible";
   selected.style.visibility = "visible";
 
-  
-  score_display.style.top = "70%";
-  score_display.style.left= "40%";
+
 
   bird.style.top = "50%";
   bird_dy = 0;
@@ -206,7 +208,7 @@ function getDifficultySettings() {
   let value = selected.value;
   if (value === "unskilled") {
     pipeSpeed = 5;
-  } else if (value === "mid") {
+  } else if (value === "average") {
     pipeSpeed = 7;
   } else if (value === "skilled") {
     pipeSpeed = 15;
