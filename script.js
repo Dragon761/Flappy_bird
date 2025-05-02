@@ -48,10 +48,10 @@ function startGame() {
   backgroundMusic.play();
 
   start_btn.style.visibility = "hidden";
+  muteBtn.style.visibility = "hidden";
+  selected.style.visibility = "hidden";
 
-  highScore = localStorage.getItem("flappyHighScore") || 0;
-  score_display.textContent = "Score: " + score + " | Best: " + highScore;
-
+  
   gameInterval = setInterval(() => {
     applyGravitiy();
     movePipes();
@@ -59,6 +59,14 @@ function startGame() {
     //updateBirdAvatar();
     frame++;
     getDifficultySettings();
+
+
+    highScore = localStorage.getItem("flappyHighScore") || 0;
+    score_display.textContent = "Score: " + score + " | Best: " + highScore;
+
+    score_display.style.top = "20px";
+    score_display.style.left= "20px";
+
     if (frame % frame_time === 0) {
       createPipe();
     }
@@ -152,8 +160,6 @@ function setScore(newScore) {
     scoreSound.play();
   }
   score = newScore;
-  score_display.textContent = "Score: " + score;
-  " Best: " + highScore;
 }
 
 function endGame() {
@@ -172,6 +178,12 @@ function endGame() {
 
 function resetGame() {
   start_btn.style.visibility = "visible";
+  muteBtn.style.visibility = "visible";
+  selected.style.visibility = "visible";
+
+  
+  score_display.style.top = "70%";
+  score_display.style.left= "40%";
 
   bird.style.top = "50%";
   bird_dy = 0;
@@ -182,29 +194,30 @@ function resetGame() {
   setScore(0);
   frame = 0;
   game_state = "Start";
-  score_display.textContent = "";
+  // score_display.textContent = "";
 
   bird.style.transform = `rotate(${0}deg)`;
 }
 
 let pipeSpeed = 3;
 
+const selected = document.getElementById("difficulty-select");
 function getDifficultySettings() {
-  const selected = document.getElementById("difficulty-select").value;
-  if (selected === "unskilled") {
+  let value = selected.value;
+  if (value === "unskilled") {
     pipeSpeed = 5;
-  } else if (selected === "mid") {
+  } else if (value === "mid") {
     pipeSpeed = 7;
-  } else if (selected === "skilled") {
+  } else if (value === "skilled") {
     pipeSpeed = 15;
-  } else if (selected === "impossible") {
+  } else if (value === "impossible") {
     pipeSpeed = 1;
   }
 }
 
-const flapSound = new Audio("");
-const scoreSound = new Audio("");
-const hitSound = new Audio("");
+const flapSound = new Audio("/Sounds/jump-15984.mp3");
+const scoreSound = new Audio("/Sounds/collect-ring-15982.mp3");
+const hitSound = new Audio("/Sounds/Hehe-Ha-Clash-Royale-Sound-Effect.mp3");
 
 const backgroundMusic = new Audio("");
 backgroundMusic.loop = true;

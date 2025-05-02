@@ -39,8 +39,8 @@ span{
 
 #score {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 40%;
+  left: 39%;
   color: rgb(0, 0, 0);
   font-size: 48;
   font-family: "Merriweather", serif;
